@@ -3,16 +3,26 @@ import React from "react";
 import { Card, Button, Icon } from "@rneui/themed";
 import { IMG_URL } from "../constants/constants";
 import { FALLBACK_POSTER } from "../constants/constants";
+import { useRentedContext } from "../context/RentedContext";
+import { useNavigation } from "@react-navigation/native";
 
 const MovieCard = ({ movie, button }) => {
+  const nav = useNavigation();
   console.log({ movie, button });
+  const { addRentedMovie, removeRentedMovie, rentedState } = useRentedContext();
 
   const rentedButton = () => {
     console.log("rented buton clicked");
+    addRentedMovie(movie);
   };
 
   const watchButton = () => {
     console.log("watch buton clicked");
+    console.log(movie.title);
+    nav.navigate("Watch", {
+      title: movie.title,
+      id: movie.id
+    });
   };
 
   return (

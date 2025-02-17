@@ -3,11 +3,16 @@ import React, { useState } from "react";
 import { useSearchContext } from "../context/SearchContext";
 import { FAB, Dialog } from "@rneui/themed";
 import MovieCard from "./MovieCard";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HomeScreen = () => {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [keyword, setKeyword] = useState("");
   const { fetchMovies, removeMovie, searchState } = useSearchContext();
+
+  const clearStorage = async () => {
+    await AsyncStorage.clear();
+  };
 
   const openDialog = () => {
     setDialogVisible(true);
@@ -79,10 +84,7 @@ const HomeScreen = () => {
           right: 20,
         }}
       />
-      {/* {searchState &&
-        searchState.map((item) => {
-          return <MovieCard />;
-        })} */}
+      <Button title="clear storage" onPress={clearStorage}></Button>
     </View>
   );
 };
