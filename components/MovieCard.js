@@ -5,15 +5,26 @@ import { IMG_URL } from "../constants/constants";
 import { FALLBACK_POSTER } from "../constants/constants";
 import { useRentedContext } from "../context/RentedContext";
 import { useNavigation } from "@react-navigation/native";
+import { Dialog } from "@rneui/themed";
+import { useState } from "react";
+import { useSearchContext } from "../context/SearchContext";
 
 const MovieCard = ({ movie, button }) => {
+  const [dialogVisible, setDialogVisible] = useState(false);
+
   const nav = useNavigation();
-  console.log({ movie, button });
   const { addRentedMovie, removeRentedMovie, rentedState } = useRentedContext();
+  const { fetchMovies, removeMovie, searchState } = useSearchContext();
 
   const rentedButton = () => {
+    setDialogVisible(true);
+  };
+
+  const wantsToRent = () => {
     console.log("rented buton clicked");
     addRentedMovie(movie);
+    removeMovie(movie.id);
+    setDialogVisible(false);
   };
 
   const watchButton = () => {
@@ -21,7 +32,7 @@ const MovieCard = ({ movie, button }) => {
     console.log(movie.title);
     nav.navigate("Watch", {
       title: movie.title,
-      id: movie.id
+      id: movie.id,
     });
   };
 
@@ -81,6 +92,20 @@ const MovieCard = ({ movie, button }) => {
           />
         )}
       </Card>
+      {dialogVisible && (
+        <Dialog>
+          <Dialog.Title title="Are you sure you wanna rent?"></Dialog.Title>
+
+          <Dialog.Actions>
+            <Button title="Yes" onPress={wantsToRent} style={{}}></Button>
+            <Button
+              title="cancel"
+              onPress={() => setDialogVisible(false)}
+              style={{}}
+            ></Button>
+          </Dialog.Actions>
+        </Dialog>
+      )}
     </View>
   );
 };
