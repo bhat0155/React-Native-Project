@@ -1,14 +1,12 @@
-import { View, Text, Button, TextInput, Alert } from "react-native";
-import React, { useEffect, useState } from "react";
-import { URL, ACCESS_TOKEN } from "../constants/constants";
+import { View, Text, Button, TextInput, Alert, FlatList } from "react-native";
+import React, { useState } from "react";
 import { useSearchContext } from "../context/SearchContext";
 import { FAB, Dialog } from "@rneui/themed";
+import MovieCard from "./MovieCard";
 
 const HomeScreen = () => {
-  const [visible, setVisible] = useState(true);
   const [dialogVisible, setDialogVisible] = useState(false);
   const [keyword, setKeyword] = useState("");
-
   const { fetchMovies, removeMovie, searchState } = useSearchContext();
 
   const openDialog = () => {
@@ -34,15 +32,17 @@ const HomeScreen = () => {
   return (
     <View style={{ flex: 1 }}>
       <Text>HomeScreen</Text>
+
+      {searchState && (
+        <FlatList
+          data={searchState}
+          renderItem={({ item }) => <MovieCard movie={item} button="rent" />}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      )}
+
       {dialogVisible && (
         <Dialog>
-          {/* <Button
-            title="Back"
-            onPress={() => {
-              setDialogVisible(false);
-            }}
-          ></Button> */}
-
           <Dialog.Title title="Find a movie to rent"></Dialog.Title>
           <TextInput
             style={{
@@ -57,16 +57,18 @@ const HomeScreen = () => {
             placeholder="eg: superman"
           />
           <Dialog.Actions>
-          <Button title="search" onPress={callTheFetch} style={{}}></Button>
-          <Button title="back" onPress={()=> setDialogVisible(false)} style={{}}></Button>
-
-
+            <Button title="search" onPress={callTheFetch} style={{}}></Button>
+            <Button
+              title="back"
+              onPress={() => setDialogVisible(false)}
+              style={{}}
+            ></Button>
           </Dialog.Actions>
         </Dialog>
       )}
 
       <FAB
-        visible={visible}
+        visible={true}
         onPress={openDialog}
         placement="right"
         icon={{ name: "search", color: "black" }}
@@ -77,10 +79,10 @@ const HomeScreen = () => {
           right: 20,
         }}
       />
-      {searchState &&
+      {/* {searchState &&
         searchState.map((item) => {
-          return <Text key={item.id}>{item.title}</Text>;
-        })}
+          return <MovieCard />;
+        })} */}
     </View>
   );
 };
