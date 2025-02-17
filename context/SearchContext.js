@@ -8,9 +8,9 @@ export const SearchProvider = ({ children }) => {
   const [searchState, setSearchState] = useState([]);
 
   // fetches movie and updates the state variable
-  const fetchMovies = async (url, keyword) => {
+  const fetchMovies = async (keyword) => {
     try {
-      const response = await fetch(`${url}${keyword}`, {
+      const response = await fetch(`${URL}${keyword}`, {
         method: "GET",
         headers: {
           accepts: "application/json",
@@ -18,6 +18,7 @@ export const SearchProvider = ({ children }) => {
         },
       });
       const data = await response.json();
+      console.log("this is coming from searchContext", data.results)
       setSearchState(data.results);
     } catch (err) {
       console.log("fetch error", err);
