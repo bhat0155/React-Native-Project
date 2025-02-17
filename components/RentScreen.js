@@ -1,19 +1,12 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { useNavigation } from "@react-navigation/native";
-import { Button } from "@react-navigation/elements";
+import { View, Text } from "react-native";
+import React from "react";
 
 const RentScreen = () => {
-    const nav = useNavigation();
-    function goTo(x) {
-      nav.navigate(x);
-    }
-    return (
-      <View>
-        <Text>RentScreen</Text>
-        <Button title="watch" onPressIn={() => goTo("Watch")}>WatchScreen</Button>
-      </View>
-    );
-}
+  return (
+    <View>
+      <Text>RentScreen</Text>
+    </View>
+  );
+};
 
-export default RentScreen
+export default RentScreen;

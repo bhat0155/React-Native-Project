@@ -1,17 +1,21 @@
-import { View, Text } from "react-native";
-import React from "react";
-import { useNavigation } from "@react-navigation/native";
-import { Button } from "@react-navigation/elements";
+import { View, Text, Button } from "react-native";
+import React, { useEffect } from "react";
+import { URL, ACCESS_TOKEN } from "../constants/constants";
+import { useSearchContext } from "../context/SearchContext";
 
 const HomeScreen = () => {
-  const nav = useNavigation();
-  function goTo(x) {
-    nav.navigate(x);
-  }
+  // const { fetchMovies, searchState } = useSearchContext();
+
+  // useEffect(() => {
+  //   console.log("initial");
+
+  //   fetchMovies(URL, "munna");
+  // }, []);
+  // console.log(searchState);
+
   return (
     <View>
       <Text>HomeScreen</Text>
-      <Button title="rented" onPressIn={() => goTo("Rent")}>Rented</Button>
     </View>
   );
 };
