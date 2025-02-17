@@ -6,6 +6,8 @@ const SearchContext = createContext();
 
 export const SearchProvider = ({ children }) => {
   const [searchState, setSearchState] = useState([]);
+
+  // fetches movie and updates the state variable
   const fetchMovies = async (url, keyword) => {
     try {
       const response = await fetch(`${url}${keyword}`, {
@@ -16,13 +18,13 @@ export const SearchProvider = ({ children }) => {
         },
       });
       const data = await response.json();
-    //   console.log(data);
       setSearchState(data.results);
     } catch (err) {
       console.log("fetch error", err);
     }
   };
 
+  // removes the movie from state variable and sets the new state
   const removeMovie = (id) => {
     setSearchState((prev) => prev.filter((item) => item.id !== id));
   };
