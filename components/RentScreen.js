@@ -12,7 +12,7 @@ const RentScreen = () => {
 
   return (
     <View>
-      {rentedState == "undefined" ? (
+      {rentedState == "undefined" || rentedState.length == 0 ? (
         <View>
           <Text>Nothing to rent</Text>
         </View>

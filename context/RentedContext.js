@@ -8,7 +8,7 @@ export const RentProvider = ({ children }) => {
   const [rentedState, setRentedState] = useState([]);
 
   const addRentedMovie = (movie) => {
-    setRentedState((prev) => [...prev, movie]);
+    setRentedState((prev) => [movie, ...prev]);
   };
 
   const removeRentedMovie = (id) => {
