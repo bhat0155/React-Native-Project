@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useDeviceOrientation } from "@react-native-community/hooks";
 import { useVideoPlayer, VideoView } from "expo-video";
 import { videoSRC } from "../constants/constants";
+import { useEventListener } from "expo";
 
 const WatchScreen = ({ route }) => {
   const { addRentedMovie, removeRentedMovie, rentedState } = useRentedContext();
@@ -15,6 +16,11 @@ const WatchScreen = ({ route }) => {
   const player = useVideoPlayer(videoSRC, (player) => {
     player.play();
     setIsPlaying(true);
+  });
+
+  // listens to the event to know whether the video is paused or not.
+  useEventListener(player, "playingChange", ({ isPlaying }) => {
+    setIsPlaying(isPlaying);
   });
 
   const vidView = useRef(null);

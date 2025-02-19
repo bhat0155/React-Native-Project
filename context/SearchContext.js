@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { Alert } from "react-native";
 
 import { URL, ACCESS_TOKEN } from "../constants/constants";
 
@@ -18,8 +19,13 @@ export const SearchProvider = ({ children }) => {
         },
       });
       const data = await response.json();
-      console.log("this is coming from searchContext", data.results)
-      setSearchState(data.results);
+      console.log("this is coming from searchContext", data.results);
+      console.log(data.results.length )
+      if ((data.results.length === 0)) {
+        Alert.alert("No movies found");
+      } else {
+        setSearchState(data.results);
+      }
     } catch (err) {
       console.log("fetch error", err);
     }

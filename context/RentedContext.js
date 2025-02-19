@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { STORAGE_KEY } from "../constants/constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
 const RentedContext = createContext();
 
 export const RentProvider = ({ children }) => {
