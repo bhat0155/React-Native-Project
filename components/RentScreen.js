@@ -1,17 +1,19 @@
 import { View, Text, FlatList } from "react-native";
 import React from "react";
 import { useRentedContext } from "../context/RentedContext";
-import { useSearchContext } from "../context/SearchContext";
 import MovieCard from "./MovieCard";
 import WatchScreen from "./WatchScreen";
 
 const RentScreen = () => {
-  const { fetchMovies, removeMovie, searchState } = useSearchContext();
   const { addRentedMovie, removeRentedMovie, rentedState } = useRentedContext();
   console.log({ rentedState });
+  console.log(rentedState.length);
 
   return (
-    <View>
+    <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
+      {rentedState.length > 0 && (
+        <Text style={{marginBlock:4}}>{rentedState.length} rented movies</Text>
+      )}
       {rentedState == "undefined" || rentedState.length == 0 ? (
         <View>
           <Text>Nothing to rent</Text>

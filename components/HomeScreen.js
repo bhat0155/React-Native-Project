@@ -1,18 +1,25 @@
-import { View, Text, Button, TextInput, Alert, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  TextInput,
+  Alert,
+  FlatList,
+  Image,
+} from "react-native";
 import React, { useState } from "react";
 import { useSearchContext } from "../context/SearchContext";
 import { FAB, Dialog } from "@rneui/themed";
 import MovieCard from "./MovieCard";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ThemeProvider, useTheme, useThemeMode } from "@rneui/themed";
 
 const HomeScreen = () => {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [keyword, setKeyword] = useState("");
   const { fetchMovies, removeMovie, searchState } = useSearchContext();
+  const { theme, updateTheme } = useTheme();
 
-  const clearStorage = async () => {
-    await AsyncStorage.clear();
-  };
+  console.log(theme.colors.background);
 
   const openDialog = () => {
     setDialogVisible(true);
@@ -35,8 +42,36 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <Text>HomeScreen</Text>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: theme.colors.background,
+        justifyContent: "center",
+        alignItems: "center",
+        alignContet: "center",
+      }}
+    >
+      {searchState.length === 0 && (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 200,
+          }}
+        >
+          <Text style={{ fontWeight: "bold", fontSize: theme.txt.md }}>Welcome</Text>
+          <Image
+            source={require("../assets/TV_Image.png")}
+            style={{
+              width: 150,
+              height: 150,
+              marginBottom: 10,
+              resizeMode: "contain",
+            }}
+          />
+        </View>
+      )}
 
       {searchState && (
         <FlatList
@@ -77,14 +112,13 @@ const HomeScreen = () => {
         onPress={openDialog}
         placement="right"
         icon={{ name: "search", color: "black" }}
-        color="orange"
+        color={theme.colors.secondary}
         style={{
           position: "absolute",
           bottom: 40,
           right: 20,
         }}
       />
-      <Button title="clear storage" onPress={clearStorage}></Button>
     </View>
   );
 };

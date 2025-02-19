@@ -8,12 +8,16 @@ import RentScreen from "./components/RentScreen";
 import WatchScreen from "./components/WatchScreen";
 import { SearchProvider } from "./context/SearchContext";
 import { RentProvider } from "./context/RentedContext";
+import { ThemeProvider } from "@rneui/themed"; 
+import { theme } from "./theme/theme";
+
 
 export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <RentProvider>
+   <ThemeProvider theme={theme}>
+     <RentProvider>
       <SearchProvider>
         <NavigationContainer>
           <Stack.Navigator>
@@ -37,5 +41,6 @@ export default function App() {
         </NavigationContainer>
       </SearchProvider>
     </RentProvider>
+   </ThemeProvider>
   );
 }
