@@ -1,5 +1,3 @@
-
-
 import { View, Text, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { Card, Button, Icon } from "@rneui/themed";
@@ -13,8 +11,8 @@ const MovieCard = ({ movie, button }) => {
   const [dialogVisible, setDialogVisible] = useState(false);
 
   const nav = useNavigation();
-  const { addRentedMovie, removeRentedMovie, rentedState } = useRentedContext();
-  const { fetchMovies, removeMovie, searchState } = useSearchContext();
+  const { addRentedMovie } = useRentedContext();
+  const { removeMovie } = useSearchContext();
 
   const rentedButton = () => {
     setDialogVisible(true);
@@ -44,23 +42,35 @@ const MovieCard = ({ movie, button }) => {
         <Card.Image
           style={styles.cardImage}
           source={{
-            uri: movie.poster_path ? `${IMG_URL}${movie.poster_path}` : FALLBACK_POSTER,
+            uri: movie.poster_path
+              ? `${IMG_URL}${movie.poster_path}`
+              : FALLBACK_POSTER,
           }}
         />
         <Text style={styles.cardDescription}>
-          {movie.overview.length > 100 ? `${movie.overview.substring(0, 100)}...` : movie.overview}
+          {movie.overview.length > 100
+            ? `${movie.overview.substring(0, 100)}...`
+            : movie.overview}
         </Text>
 
         {button === "rent" ? (
           <Button
-            icon={<Icon name="rocket" color="#ffffff" iconStyle={styles.iconStyle} />}
+            icon={
+              <Icon
+                name="rocket"
+                color="#ffffff"
+                iconStyle={styles.iconStyle}
+              />
+            }
             buttonStyle={styles.rentButton}
             title="Rent"
             onPress={rentedButton}
           />
         ) : (
           <Button
-            icon={<Icon name="tv" color="#ffffff" iconStyle={styles.iconStyle} />}
+            icon={
+              <Icon name="tv" color="#ffffff" iconStyle={styles.iconStyle} />
+            }
             buttonStyle={styles.watchButton}
             title="Watch"
             onPress={watchButton}
@@ -88,19 +98,19 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     elevation: 5,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 8,
-    backgroundColor: "#ebf5ee"
+    backgroundColor: "#ebf5ee",
   },
   cardTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   cardImage: {
     height: 200, // Increased height for a clearer image
-    width: '100%',
+    width: "100%",
     borderRadius: 10,
     marginBottom: 10,
     resizeMode: "contain", // Maintain aspect ratio without cutting the image

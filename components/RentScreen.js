@@ -5,7 +5,7 @@ import MovieCard from "./MovieCard";
 import { useTheme } from "@rneui/themed";
 
 const RentScreen = () => {
-  const { addRentedMovie, removeRentedMovie, rentedState } = useRentedContext();
+  const { rentedState } = useRentedContext();
   console.log({ rentedState });
   console.log(rentedState.length);
   const { theme } = useTheme();

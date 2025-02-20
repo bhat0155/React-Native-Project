@@ -11,12 +11,12 @@ import React, { useState } from "react";
 import { useSearchContext } from "../context/SearchContext";
 import { FAB, Dialog } from "@rneui/themed";
 import MovieCard from "./MovieCard";
-import { ThemeProvider, useTheme, useThemeMode } from "@rneui/themed";
+import {  useTheme } from "@rneui/themed";
 
 const HomeScreen = () => {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [keyword, setKeyword] = useState("");
-  const { fetchMovies, removeMovie, searchState } = useSearchContext();
+  const { fetchMovies, searchState } = useSearchContext();
   const { theme, updateTheme } = useTheme();
 
   console.log(theme.colors.background);

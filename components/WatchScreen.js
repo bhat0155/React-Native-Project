@@ -8,7 +8,7 @@ import { videoSRC } from "../constants/constants";
 import { useEventListener } from "expo";
 
 const WatchScreen = ({ route }) => {
-  const { addRentedMovie, removeRentedMovie, rentedState } = useRentedContext();
+  const {  removeRentedMovie } = useRentedContext();
   const orientation = useDeviceOrientation();
   const [orient, setOrient] = useState("portrait");
   const [isPlaying, setIsPlaying] = useState(false);
