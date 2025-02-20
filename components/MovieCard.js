@@ -80,9 +80,18 @@ const MovieCard = ({ movie, button }) => {
       {dialogVisible && (
         <Dialog>
           <Dialog.Title title="Are you sure you wanna rent?" />
+
           <Dialog.Actions>
-            <Button title="Yes" onPress={wantsToRent} />
-            <Button title="Cancel" onPress={() => setDialogVisible(false)} />
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <Button title="Cancel" onPress={() => setDialogVisible(false)} />
+              <Button title="Accept" onPress={wantsToRent} />
+            </View>
           </Dialog.Actions>
         </Dialog>
       )}

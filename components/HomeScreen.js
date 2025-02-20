@@ -34,7 +34,7 @@ const HomeScreen = () => {
     setDialogVisible(false);
 
     if (!keyword.trim()) {
-      Alert.alert("please provide a value in the searchbar");
+      Alert.alert("Please provide a value in the searchbar");
     }
     if (keyword) {
       fetchMovies(keyword);
@@ -105,8 +105,19 @@ const HomeScreen = () => {
                 placeholder="eg: superman"
               />
               <Dialog.Actions>
-                <Button title="search" onPress={callTheFetch} />
-                <Button title="back" onPress={() => setDialogVisible(false)} />
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  }}
+                >
+                  <Button
+                    title="Back"
+                    onPress={() => setDialogVisible(false)}
+                  />
+                  <Button title="Search" onPress={callTheFetch} />
+                </View>
               </Dialog.Actions>
             </Dialog>
           )}
@@ -121,6 +132,8 @@ const HomeScreen = () => {
               position: "absolute",
               bottom: 40,
               right: 20,
+              borderWidth: 1,
+              borderColor: "gray",
             }}
           />
         </View>

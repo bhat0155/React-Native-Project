@@ -20,8 +20,8 @@ const RentScreen = () => {
       }}
     >
       {rentedState.length > 0 && (
-        <Text style={{ marginBlock: 4 }}>
-          {rentedState.length} rented movies
+        <Text style={{ marginBlock: 10, fontWeight: "bold" }}>
+          {rentedState.length} Rented Movies
         </Text>
       )}
       {rentedState == "undefined" || rentedState.length == 0 ? (
