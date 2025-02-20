@@ -112,7 +112,7 @@ const HomeScreen = () => {
         onPress={openDialog}
         placement="right"
         icon={{ name: "search", color: "black" }}
-        color={theme.colors.secondary}
+        color="#ebf5ee"
         style={{
           position: "absolute",
           bottom: 40,

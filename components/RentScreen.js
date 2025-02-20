@@ -2,15 +2,16 @@ import { View, Text, FlatList } from "react-native";
 import React from "react";
 import { useRentedContext } from "../context/RentedContext";
 import MovieCard from "./MovieCard";
-import WatchScreen from "./WatchScreen";
+import { useTheme } from "@rneui/themed";
 
 const RentScreen = () => {
   const { addRentedMovie, removeRentedMovie, rentedState } = useRentedContext();
   console.log({ rentedState });
   console.log(rentedState.length);
+  const {theme}= useTheme()
 
   return (
-    <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
+    <View style={{flex:1, justifyContent:"center", alignItems:"center", backgroundColor: theme.colors.background}}>
       {rentedState.length > 0 && (
         <Text style={{marginBlock:4}}>{rentedState.length} rented movies</Text>
       )}

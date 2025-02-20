@@ -14,11 +14,20 @@
     },
     "ios": {
       "supportsTablet": true,
-      "requireFullScreen": true
+      "requiresFullscreen": true,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "icon": {
+        "dark": "./assets/dark.png",
+        "light": "./assets/light.png",
+        "tint": "./assets/tinted.png"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
+        "monochromeImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
@@ -30,7 +39,19 @@
       ["expo-video",{
         "supportsBackgroundPlayback": true,
         "supportsPictureInPicture": true
-      }]
+      }],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#232323",
+          "image": "./assets/splash-icon-dark.png",
+          "dark": {
+            "image": "./assets/splash-icon-light.png",
+            "backgroundColor": "#000000"
+          },
+          "imageWidth": 200
+        }
+      ]
     ]
   }
 }
