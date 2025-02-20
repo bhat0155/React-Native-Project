@@ -8,12 +8,21 @@ const RentScreen = () => {
   const { addRentedMovie, removeRentedMovie, rentedState } = useRentedContext();
   console.log({ rentedState });
   console.log(rentedState.length);
-  const {theme}= useTheme()
+  const { theme } = useTheme();
 
   return (
-    <View style={{flex:1, justifyContent:"center", alignItems:"center", backgroundColor: theme.colors.background}}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: theme.colors.background,
+      }}
+    >
       {rentedState.length > 0 && (
-        <Text style={{marginBlock:4}}>{rentedState.length} rented movies</Text>
+        <Text style={{ marginBlock: 4 }}>
+          {rentedState.length} rented movies
+        </Text>
       )}
       {rentedState == "undefined" || rentedState.length == 0 ? (
         <View>
