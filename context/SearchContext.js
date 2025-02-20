@@ -7,10 +7,12 @@ const SearchContext = createContext();
 
 export const SearchProvider = ({ children }) => {
   const [searchState, setSearchState] = useState([]);
+  const [error, setError]=useState(false);
 
   // fetches movie and updates the state variable
   const fetchMovies = async (keyword) => {
     try {
+      setError(false)
       const response = await fetch(`${URL}${keyword}`, {
         method: "GET",
         headers: {
@@ -28,6 +30,7 @@ export const SearchProvider = ({ children }) => {
       }
     } catch (err) {
       console.log("fetch error", err);
+      setError(true)
     }
   };
 
@@ -38,7 +41,7 @@ export const SearchProvider = ({ children }) => {
 
   return (
     // This will give the access of methods to the children on which this will be wrapped
-    <SearchContext.Provider value={{ fetchMovies, removeMovie, searchState }}>
+    <SearchContext.Provider value={{ fetchMovies, removeMovie, searchState, error }}>
       {children}
     </SearchContext.Provider>
   );
